@@ -43,6 +43,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiError> handleGeneric(Exception ex) {
+    ex.printStackTrace(); // ← temporaire pour déboguer
     return ResponseEntity.status(500).body(
             ApiError.builder()
                     .status(500)

@@ -1,5 +1,6 @@
 package infirmerie.backend_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import infirmerie.backend_api.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,32 +18,33 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Utilisateur implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = true)
     private String nom;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = true)
     private String prenom;
 
     @Column(length = 255, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 255, nullable = false)
-    private String motDePasse;
+    @Column(length = 100, nullable = false)
+    private String password;
 
     @Enumerated(EnumType.STRING)  // stocke "ADMIN" et non 0, 1, 2...
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Role role;
 
     @Column(length = 20, nullable = true)
     private String poste;
 
-    @Column(length = 20,  nullable = false)
+    @Column(length = 20,  nullable = true)
     private String ville;
 
     @Column(length = 50, nullable = true)
@@ -51,7 +53,10 @@ public class Utilisateur implements UserDetails {
     @Column(nullable = false)
     private Boolean statut; // true = actif
 
+    //private String telephone;
+
     private LocalDateTime dateCreation;
+
 
     private LocalDateTime derniereConnexion;
 
@@ -64,7 +69,7 @@ public class Utilisateur implements UserDetails {
 
     @Override
     public String getPassword() {
-        return motDePasse;
+        return password;
     }
 
     @Override

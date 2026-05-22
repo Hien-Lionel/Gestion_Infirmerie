@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
-                        request.getMotDePasse()
+                        request.getPassword()
                 )
         );
 
@@ -52,12 +52,12 @@ public class AuthServiceImpl implements AuthService {
         return AuthResponse.builder()
                 .token(token)
                 .utilisateur(UtilisateurResponse.builder()
-                        .id(utilisateur.getId())
-                        .nom(utilisateur.getNom())
-                        .prenom(utilisateur.getPrenom())
+                       // .id(utilisateur.getId())
+                        /*.nom(utilisateur.getNom())
+                        .prenom(utilisateur.getPrenom())*/
                         .email(utilisateur.getEmail())
-                        .role(utilisateur.getRole())
-                        .site(utilisateur.getSite())
+                        /*.role(utilisateur.getRole())
+                        .site(utilisateur.getSite())*/
                         .build())
                 .build();
     }

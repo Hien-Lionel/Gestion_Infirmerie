@@ -12,5 +12,5 @@ public class LoginRequest {
     private String email;
 
     @NotBlank(message = "Le mot de passe est obligatoire")
-    private String motDePasse;
+    private String password;
 }
